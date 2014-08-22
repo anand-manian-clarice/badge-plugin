@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="com.plugin.badge.BadgePlugin"
+        version="0.0.0">
+
+    <name>BadgePlugin</name>
+
+    <description>OvrC plugin to access and modify the badge number of the app icon of Android</description>
+    <repo>https://github.com/Snap-AV/cs-ui-mobile</repo>
+    <keywords>badge</keywords>
+
+    <author>Anand Manian</author>
+
+    <engines>
+        <engine name="cordova" version=">=3.0.0" />
+    </engines>
+
+    <js-module src="www/badge-plugin.js" name="BadgePlugin">
+        <clobbers target="plugin.notification.BadgePlugin" />
+        <clobbers target="cordova.plugins.notification.BadgePlugin" />
+    </js-module>
+
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="BadgePlugin">
+                <param name="android-package" value="com.plugin.badge.BadgePlugin"/>
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="com.sec.android.provider.badge.permission.READ" />
+            <uses-permission android:name="com.sec.android.provider.badge.permission.WRITE" />
+            <uses-permission android:name="com.htc.launcher.permission.READ_SETTINGS" />
+            <uses-permission android:name="com.htc.launcher.permission.UPDATE_SHORTCUT" />
+            <uses-permission android:name="com.sonyericsson.home.permission.BROADCAST_BADGE" />
+        </config-file>
+
+        <source-file src="src/android/BadgePlugin.java" target-dir="src/com/plugin/badge" />
+
+    </platform>
+</plugin>
